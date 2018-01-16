@@ -3,6 +3,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 import projetTSP.algorithmes.Permutation;
+import projetTSP.algorithmes.Voisin;
+import projetTSP.model.Ville;
 
 public class Main {
 
@@ -10,6 +12,7 @@ public class Main {
 
 		Parseur p = new Parseur();
 		Permutation permutation = new Permutation();
+		Voisin voisin = new Voisin();
 //		System.out.println(p.getDistances(p.construireListeVille("kroA100.tsp")));
 		System.out.println(p.getDistances(p.construireListeVille("kroA100.tsp")).size());
 
@@ -24,7 +27,7 @@ public class Main {
 		villes.add(v4);
 		
 		System.out.println(p.getDistances(villes));
-		System.out.println(permutation.permutation(villes)+"\n");
+		System.out.println(permutation.calculPermutation(villes)+"\n");
 		
 		villes.clear();
 		villes.add(v3);
@@ -33,9 +36,11 @@ public class Main {
 		villes.add(v1);
 		
 		System.out.println(p.getDistances(villes));
-		System.out.println(permutation.permutation(villes)+"\n");
+		System.out.println(permutation.calculPermutation(villes)+"\n");
+		System.out.println("voisin le plus proche : "+voisin.trouverVoisinProche(v2, villes));
 		
-		System.out.println(permutation.permutation((p.melangerVilles(p.construireListeVille("kroA100.tsp")))));
+		System.out.println(permutation.calculPermutation((p.melangerVilles(p.construireListeVille("kroA100.tsp")))));
+	
 	}
 
 }

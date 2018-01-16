@@ -1,4 +1,4 @@
-package projetTSP;
+package projetTSP.model;
 
 public class Ville {
 

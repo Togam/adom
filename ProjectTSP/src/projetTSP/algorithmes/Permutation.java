@@ -4,13 +4,13 @@ import java.util.List;
 import java.util.TreeMap;
 
 import projetTSP.Parseur;
-import projetTSP.Ville;
+import projetTSP.model.Ville;
 
 public class Permutation {
 
 	private Parseur parseur;
 	
-	public int permutation(List<Ville> villes) {
+	public int calculPermutation(List<Ville> villes) {
 		parseur = new Parseur();
 		TreeMap<String, Integer> tmap = parseur.getDistances(villes);
 		int permutation = 0;

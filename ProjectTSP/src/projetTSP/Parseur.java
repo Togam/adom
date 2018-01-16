@@ -1,4 +1,5 @@
 package projetTSP;
+
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -11,7 +12,11 @@ import java.util.TreeMap;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
+import projetTSP.model.Ville;
+
 /**
+ * Classe qui parse un fichier ou traite des liste
+ * 
  * @author six
  *
  */
