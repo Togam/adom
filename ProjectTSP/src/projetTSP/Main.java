@@ -37,10 +37,12 @@ public class Main {
 		
 		System.out.println(p.getDistances(villes));
 		System.out.println(permutation.calculPermutation(villes)+"\n");
-		System.out.println("voisin le plus proche : "+voisin.trouverVoisinProche(v2, villes));
+//		System.out.println("voisin le plus proche : "+voisin.trouverVoisinProche(v3, villes));
 		
-		System.out.println(permutation.calculPermutation((p.melangerVilles(p.construireListeVille("kroA100.tsp")))));
+//		System.out.println(permutation.calculPermutation((p.melangerVilles(p.construireListeVille("kroA100.tsp")))));
 	
+		System.out.println(voisin.calculAlgoHeuristique(villes));
+		
 	}
 
 }

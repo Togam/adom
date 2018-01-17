@@ -1,51 +1,66 @@
 package projetTSP.algorithmes;
 
-import java.util.HashMap;
-import java.util.Iterator;
 import java.util.List;
-import java.util.Map;
-import java.util.Map.Entry;
-import java.util.Set;
 import java.util.TreeMap;
 
 import projetTSP.Parseur;
 import projetTSP.model.Ville;
 
+/**
+ * Classe réunissant les différents algorithmes liés aux voisins
+ * 
+ * @author six
+ *
+ */
 public class Voisin {
 
 	private Parseur parseur;
 
 	/**
-	 * @param depart
+	 * Algorithme heuristique utilisant la méthode des voisins les plus proches
+	 * 
 	 * @param villes
-	 * @return le numéro de la ville la plus proche de la ville passée en param
+	 * @return la distance totale du chemin de l'algo des voisins les plus proches
 	 */
-	public int trouverVoisinProche(Ville depart, List<Ville> villes) {
+	public int calculAlgoHeuristique(List<Ville> villes) {
+		Ville premierdepart = villes.get(0);
+		Ville depart = villes.get(0);
+		Ville next = null;
 		parseur = new Parseur();
 		TreeMap<String, Integer> tmap = parseur.getDistances(villes);
-		Map<Integer, Integer> voisins = new HashMap<Integer, Integer>();
+		// la distance dans les fichier est toujours un nombre qui a maximum 4 chiffres
+		int dist = 9999;
+		int disttotale = 0;
+		// int index =0;
 
-		for (Ville ville : villes) {
-			if (tmap.get("dist(" + depart.getNum() + "," + ville.getNum() + ")") != null) {
-				voisins.put(ville.getNum(), tmap.get("dist(" + depart.getNum() + "," + ville.getNum() + ")"));
-			} else if (tmap.get("dist(" + ville.getNum() + "," + depart.getNum() + ")") != null) {
-				voisins.put(ville.getNum(), tmap.get("dist(" + ville.getNum() + "," + depart.getNum() + ")"));
+		while (villes.size() > 1) {
+			int i = -1;
+			int index = 0;
+			for (Ville ville : villes) {
+				i++;
+				if (tmap.get("dist(" + depart.getNum() + "," + ville.getNum() + ")") != null
+						&& tmap.get("dist(" + depart.getNum() + "," + ville.getNum() + ")") < dist) {
+					dist = tmap.get("dist(" + depart.getNum() + "," + ville.getNum() + ")");
+					index = i;
+				} else if (tmap.get("dist(" + ville.getNum() + "," + depart.getNum() + ")") != null
+						&& tmap.get("dist(" + ville.getNum() + "," + depart.getNum() + ")") < dist) {
+					dist = tmap.get("dist(" + ville.getNum() + "," + depart.getNum() + ")");
+				}
 			}
+			disttotale += dist;
+			next = villes.get(index);
+			System.out.println("Ville courante : " + depart.getNum() + " - Ville la plus proche : " + next.getNum()
+					+ " - distance : " + dist);
+			villes.remove(depart);
+			depart = next;
+			dist = 9999;
 		}
-
-		// on récupére la première valeur de la map pour la comparer avec les suivantes
-		Set<Integer> cles = voisins.keySet();
-		Iterator<Integer> it = cles.iterator();
-		int cle = it.next();
-
-		int dist = voisins.get(cle);
-		int numVillePlusProche = cle;
-		for (Entry<Integer, Integer> entry : voisins.entrySet()) {
-			if (entry.getValue() < dist) {
-				dist = entry.getValue();
-				numVillePlusProche = entry.getKey();
-			}
-		}
-		return numVillePlusProche;
+		// retour à la ville de départ
+		dist = tmap.get("dist(" + premierdepart.getNum() + "," + next.getNum() + ")");
+		disttotale += dist;
+		System.out.println("Ville courante : " + next.getNum() + " - retour à la ville de départ : "
+				+ premierdepart.getNum() + " - distance : " + dist);
+		return disttotale;
 	}
+
 }
