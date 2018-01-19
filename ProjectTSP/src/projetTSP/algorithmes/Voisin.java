@@ -1,5 +1,6 @@
 package projetTSP.algorithmes;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.TreeMap;
 
@@ -61,6 +62,81 @@ public class Voisin {
 		System.out.println("Ville courante : " + next.getNum() + " - retour à la ville de départ : "
 				+ premierdepart.getNum() + " - distance : " + dist);
 		return disttotale;
+	}
+
+	/**
+	 * Algo swap
+	 * 
+	 * @param villes
+	 * @return la liste de villes ayant subi l'algo swap
+	 */
+	public List<List<Ville>> swap(List<Ville> villes) {
+		List<List<Ville>> swaplist = new ArrayList<List<Ville>>();
+		Ville vi = null;
+		Ville vj = null;
+		for (int i = 0; i < villes.size() - 1; i++) {
+			List<Ville> list_dep = new ArrayList<Ville>(villes);
+			for (int j = i + 1; j < villes.size(); j++) {
+				vi = list_dep.get(i);
+				vj = list_dep.get(j);
+				list_dep.set(i, vj);
+				list_dep.set(j, vi);
+				swaplist.add(list_dep);
+				String s = "";
+				for (int k = 0; k < list_dep.size(); k++) {
+					s += list_dep.get(k).getNum() + ", ";
+				}
+				System.out.println(s + " fin");
+			}
+
+		}
+		return swaplist;
+	}
+
+	/**
+	 * Inverse la liste passé en param
+	 * 
+	 * @param v1
+	 * @param v2
+	 * @param villes
+	 * @return retourne la liste inversé
+	 */
+	public List<Ville> inverse(Ville v1, Ville v2, List<Ville> villes) {
+		List<Ville> v = new ArrayList<Ville>(villes);
+		int i1 = Math.min(villes.indexOf(v1), villes.indexOf(v2));
+		int i2 = Math.max(villes.indexOf(v1), villes.indexOf(v2));
+		Ville vi;
+		Ville vj;
+		for (int i = i1; i < i2; i++) {
+			vi = villes.get(i);
+			vj = villes.get(i2);
+			v.set(i, vj);
+			v.set(i2, vi);
+			i2 = i2 - 1;
+		}
+		return v;
+	}
+
+	/**
+	 * Algo two opt
+	 * 
+	 * @param villes
+	 * @return la liste de villes ayant subi l'algo two opt
+	 */
+	public List<List<Ville>> twoopt(List<Ville> villes) {
+		List<List<Ville>> twolist = new ArrayList<List<Ville>>();
+		for (int i = 0; i < villes.size() - 1; i++) {
+			for (int j = i + 1; j < villes.size(); j++) {
+				twolist.add(i, inverse(villes.get(i), villes.get(j), villes));
+				String s = "";
+				for (int k = 0; k < inverse(villes.get(i), villes.get(j), villes).size(); k++) {
+					s += inverse(villes.get(i), villes.get(j), villes).get(k).getNum() + ", ";
+				}
+				System.out.println(s + " fin");
+			}
+		}
+
+		return twolist;
 	}
 
 }

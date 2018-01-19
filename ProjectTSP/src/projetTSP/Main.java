@@ -14,7 +14,7 @@ public class Main {
 		Permutation permutation = new Permutation();
 		Voisin voisin = new Voisin();
 //		System.out.println(p.getDistances(p.construireListeVille("kroA100.tsp")));
-		System.out.println(p.getDistances(p.construireListeVille("kroA100.tsp")).size());
+//		System.out.println(p.getDistances(p.construireListeVille("kroA100.tsp")).size());
 
 		List<Ville> villes = new ArrayList<Ville>();
 		Ville v1 = new Ville(1, 2, 3);
@@ -25,24 +25,28 @@ public class Main {
 		villes.add(v2);
 		villes.add(v3);
 		villes.add(v4);
+//		voisin.swap(villes);
+		voisin.twoopt(villes);
 		
-		System.out.println(p.getDistances(villes));
-		System.out.println(permutation.calculPermutation(villes)+"\n");
-		
-		villes.clear();
-		villes.add(v3);
-		villes.add(v2);
-		villes.add(v4);
-		villes.add(v1);
-		
-		System.out.println(p.getDistances(villes));
-		System.out.println(permutation.calculPermutation(villes)+"\n");
-//		System.out.println("voisin le plus proche : "+voisin.trouverVoisinProche(v3, villes));
-		
-//		System.out.println(permutation.calculPermutation((p.melangerVilles(p.construireListeVille("kroA100.tsp")))));
-	
-		System.out.println(voisin.calculAlgoHeuristique(villes));
-		
+//		System.out.println(p.getDistances(villes));
+//		System.out.println(permutation.calculPermutation(villes)+"\n");
+//		
+//		villes.clear();
+//		villes.add(v3);
+//		villes.add(v2);
+//		villes.add(v4);
+//		villes.add(v1);
+//		
+//		System.out.println(p.getDistances(villes));
+//		System.out.println(permutation.calculPermutation(villes)+"\n");
+////		System.out.println("voisin le plus proche : "+voisin.trouverVoisinProche(v3, villes));
+//		
+////		System.out.println(permutation.calculPermutation((p.melangerVilles(p.construireListeVille("kroA100.tsp")))));
+//	
+//		System.out.println(voisin.calculAlgoHeuristique(villes));
+//		
+////		System.out.println(villes);
+//		
 	}
 
 }
