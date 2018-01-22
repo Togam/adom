@@ -16,6 +16,7 @@ import projetTSP.model.Ville;
 public class Voisin {
 
 	private Parseur parseur;
+	private int pluspetite;
 
 	/**
 	 * Algorithme heuristique utilisant la méthode des voisins les plus proches
@@ -75,8 +76,8 @@ public class Voisin {
 		Ville vi = null;
 		Ville vj = null;
 		for (int i = 0; i < villes.size() - 1; i++) {
-			List<Ville> list_dep = new ArrayList<Ville>(villes);
 			for (int j = i + 1; j < villes.size(); j++) {
+				List<Ville> list_dep = new ArrayList<Ville>(villes);
 				vi = list_dep.get(i);
 				vj = list_dep.get(j);
 				list_dep.set(i, vj);
@@ -87,9 +88,11 @@ public class Voisin {
 					s += list_dep.get(k).getNum() + ", ";
 				}
 				System.out.println(s + " fin");
+
 			}
 
 		}
+		System.out.println("fin swap");
 		return swaplist;
 	}
 
@@ -135,8 +138,31 @@ public class Voisin {
 				System.out.println(s + " fin");
 			}
 		}
-
 		return twolist;
 	}
 
+	/**
+	 * calcule via la stratégie de mouvement du premier voisin le swap swap
+	 * 
+	 * @param listVilles
+	 * @return la distance du meilleur chemin
+	 */
+	public int calculSwapPremierVoisinAméliorant(List<Ville> listVilles) {
+		List<List<Ville>> swap = this.swap(listVilles);
+		List<Ville> depart = new ArrayList<Ville>(listVilles);
+		Permutation permutation = new Permutation();
+		this.pluspetite = permutation.calculPermutation(depart);
+		System.err.println("distCheminDep = " + pluspetite);
+		for (List<Ville> villes : swap) {
+			if (permutation.calculPermutation(villes) < pluspetite) {
+				pluspetite = permutation.calculPermutation(villes);
+				this.pluspetite = permutation.calculPermutation(villes);
+				System.err.println("distance plus courte trouvé : " + villes.toString() + " = " + pluspetite + "\n");
+				System.err.println("relance l'algorithme \n");
+				System.err.println("distCheminDep suivant = " + pluspetite);
+				this.calculSwapPremierVoisinAméliorant(villes);
+			}
+		}
+		return this.pluspetite;
+	}
 }

@@ -36,7 +36,7 @@ public class Permutation {
 			permutation += tmap.get("dist(" + villes.get(0).getNum() + "," + villes.get(i).getNum() + ")");
 
 		}
-		System.out.println(tmap);
+//		System.out.println(tmap);
 		return permutation;
 	}
 	

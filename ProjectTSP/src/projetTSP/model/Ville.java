@@ -1,5 +1,9 @@
 package projetTSP.model;
 
+/**
+ * @author six
+ *
+ */
 public class Ville {
 
 	private int num;
@@ -38,7 +42,7 @@ public class Ville {
 
 	@Override
 	public String toString() {
-		return "Ville [num=" + num + ", x=" + x + ", y=" + y + "]";
+		return "[" + num+"]";
 	}
-
+	
 }

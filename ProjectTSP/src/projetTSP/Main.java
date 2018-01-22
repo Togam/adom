@@ -21,12 +21,18 @@ public class Main {
 		Ville v2 = new Ville(2, 5, 4);
 		Ville v3 = new Ville(3, 3, 3);
 		Ville v4 = new Ville(4, 5, 7);
+		Ville v5 = new Ville(5, 10, 7);
+		Ville v6 = new Ville(6, 5, 10);
+		Ville v7 = new Ville(7, 8, 8);
 		villes.add(v1);
 		villes.add(v2);
 		villes.add(v3);
 		villes.add(v4);
+		villes.add(v5);
+		villes.add(v6);
+		villes.add(v7);
 //		voisin.swap(villes);
-		voisin.twoopt(villes);
+//		voisin.twoopt(villes);
 		
 //		System.out.println(p.getDistances(villes));
 //		System.out.println(permutation.calculPermutation(villes)+"\n");
@@ -46,7 +52,9 @@ public class Main {
 //		System.out.println(voisin.calculAlgoHeuristique(villes));
 //		
 ////		System.out.println(villes);
-//		
+//	
+		System.out.println("distance la plus petite : "+voisin.calculSwapPremierVoisinAméliorant(villes));
+		
 	}
 
 }
